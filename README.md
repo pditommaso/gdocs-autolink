@@ -33,3 +33,7 @@ dispatches a new paste event with an HTML link as clipboard data.
    `docs-short-links-vX.Y.Z.zip` and attaches it to a GitHub release.
 4. Upload that zip in the
    [Chrome Web Store developer console](https://chrome.google.com/webstore/devconsole).
+
+## License
+
+[MIT](LICENSE)

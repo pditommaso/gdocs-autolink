@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Docs GitHub Autolink",
+  "name": "Docs Short Links",
   "version": "1.0.0",
   "description": "When pasting a GitHub issue/PR or Jira issue URL into Google Docs, insert it as a short link (#123 / KEY-123).",
   "content_scripts": [

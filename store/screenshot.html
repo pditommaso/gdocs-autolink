@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  :root { --indigo:#2B2A6B; --yellow:#FFD23F; --amber:#E0A800; --ink:#1d1c3a; --muted:#8b89b8; --link:#1a5fd0; }
+  * { box-sizing:border-box; margin:0; }
+  body { width:1280px; height:800px; background:var(--indigo); font-family:-apple-system,"Helvetica Neue",Helvetica,sans-serif; color:#fff; overflow:hidden; position:relative; }
+  .left { position:absolute; left:88px; top:0; bottom:0; width:470px; display:flex; flex-direction:column; justify-content:center; }
+  .icon { width:72px; height:72px; margin-bottom:36px; }
+  h1 { font-size:60px; line-height:1.05; font-weight:800; letter-spacing:-1.5px; }
+  h1 .hash { color:var(--yellow); }
+  p.sub { margin-top:24px; font-size:23px; line-height:1.45; color:#cfcdf2; max-width:420px; }
+  .doc { position:absolute; left:620px; top:96px; width:580px; height:608px; background:#fff; border-radius:10px; color:var(--ink); padding:56px 56px; box-shadow:0 30px 60px rgba(10,8,40,.45); }
+  .doc h2 { font-size:28px; font-weight:700; margin-bottom:22px; }
+  .doc p { font-size:19px; line-height:1.65; margin-bottom:18px; }
+  .doc a { white-space:nowrap; color:var(--link); text-decoration:underline; text-underline-offset:3px; }
+  .doc a.new { background:#FFF1B8; border-radius:3px; padding:0 2px; }
+  .bar { height:12px; background:#ecebf5; border-radius:6px; margin:14px 0; }
+  .paste { position:absolute; left:560px; top:470px; width:470px; background:var(--ink); color:#fff; border-radius:12px; padding:18px 22px; font-size:16px; box-shadow:0 20px 40px rgba(10,8,40,.5); }
+  .paste .from { color:var(--muted); text-decoration:line-through; font-family:Menlo,monospace; font-size:14px; word-break:break-all; }
+  .paste .to { margin-top:10px; font-size:22px; font-weight:700; }
+  .paste .to span { color:var(--yellow); }
+  .paste .row { display:flex; align-items:center; gap:10px; }
+  .paste .row + .row { margin-top:14px; padding-top:14px; border-top:1px solid #34336a; }
+  .arrow { color:var(--yellow); font-size:20px; }
+</style></head>
+<body>
+  <div class="left">
+    <svg class="icon" viewBox="0 0 128 128"><rect x="4" y="4" width="120" height="120" rx="30" fill="#3a3986"/><g fill="none" stroke-linecap="round" stroke-width="16"><path stroke="#E0A800" transform="translate(0 5)" d="M45 22 L38 104 M93 22 L86 104 M20 44 L108 44 M20 82 L108 82"/><path stroke="#FFD23F" d="M45 22 L38 104 M93 22 L86 104 M20 44 L108 44 M20 82 L108 82"/></g></svg>
+    <h1>Paste a long link.<br>Get <span class="hash">#1988</span>.</h1>
+    <p class="sub">GitHub issues, pull requests and Jira issues turn into short, clickable links as you paste them into Google Docs.</p>
+  </div>
+
+  <div class="doc">
+    <h2>Scheduler sync, 16 Nov</h2>
+    <p>Retry storm on node drain is fixed in <a class="new" href="#">#1988</a>, with the cleanup split out into <a href="#">#2001</a>.</p>
+    <p>Quota alerts move to next sprint, tracked in <a class="new" href="#">SCHED-123</a>.</p>
+    <div class="bar" style="width:92%"></div>
+    <div class="bar" style="width:78%"></div>
+    <div class="bar" style="width:85%"></div>
+    <div class="bar" style="width:40%; margin-bottom:34px"></div>
+    <div class="bar" style="width:88%"></div>
+    <div class="bar" style="width:94%"></div>
+    <div class="bar" style="width:70%"></div>
+    <div class="bar" style="width:82%"></div>
+    <div class="bar" style="width:55%"></div>
+  </div>
+
+  <div class="paste">
+    <div class="row"><div>
+      <div class="from">https://github.com/seqeralabs/sched/issues/1988</div>
+      <div class="to"><span class="arrow">↳</span> <span>#1988</span></div>
+    </div></div>
+    <div class="row"><div>
+      <div class="from">https://seqera.atlassian.net/browse/SCHED-123</div>
+      <div class="to"><span class="arrow">↳</span> <span>SCHED-123</span></div>
+    </div></div>
+  </div>
+</body></html>

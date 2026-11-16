@@ -1,10 +1,11 @@
 name: Release
 
-# Push a tag like v1.0.1 (matching "version" in manifest.json) to build the
-# Chrome Web Store zip and attach it to a GitHub release.
+# A push to main whose commit message starts with a line containing
+# "[release]" builds the Chrome Web Store zip for the version in
+# manifest.json, tags it vX.Y.Z and attaches the zip to a GitHub release.
 on:
   push:
-    tags: ['v*']
+    branches: [main]
 
 permissions:
   contents: write
@@ -13,24 +14,42 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Check tag matches manifest version
+      - name: Check for [release] in commit title
+        id: check
+        env:
+          MSG: ${{ github.event.head_commit.message }}
         run: |
-          version=$(jq -r .version manifest.json)
-          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
-            echo "::error::Tag $GITHUB_REF_NAME does not match manifest version v$version"
-            exit 1
+          if printf '%s\n' "$MSG" | head -n1 | grep -qF '[release]'; then
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No [release] in commit title, skipping."
           fi
 
-      - name: Package extension
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.release == 'true'
+
+      - name: Read version and check it is new
+        if: steps.check.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          ZIP="docs-short-links-$GITHUB_REF_NAME.zip"
+          TAG="v$(jq -r .version manifest.json)"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "::error::Release $TAG already exists. Increase version in manifest.json."
+            exit 1
+          fi
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+
+      - name: Package extension
+        if: steps.check.outputs.release == 'true'
+        run: |
+          ZIP="docs-short-links-$TAG.zip"
           zip -r "$ZIP" manifest.json content.js icons/*.png
           unzip -l "$ZIP"
           echo "ZIP=$ZIP" >> "$GITHUB_ENV"
 
-      - name: Create release
+      - name: Create tag and release
+        if: steps.check.outputs.release == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" "$ZIP" --title "$GITHUB_REF_NAME" --generate-notes
+        run: gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" --title "$TAG" --generate-notes

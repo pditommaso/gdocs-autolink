@@ -26,9 +26,10 @@ dispatches a new paste event with an HTML link as clipboard data.
 
 ## Release
 
-1. Increase `version` in `manifest.json` and commit.
-2. Tag and push: `git tag v1.0.1 && git push origin v1.0.1`.
-3. The `Release` workflow checks the tag matches the manifest version, builds
+1. Increase `version` in `manifest.json`.
+2. Commit with `[release]` in the first line of the message, e.g.
+   `[release] v1.0.1`, and push to `main`.
+3. The `Release` workflow tags the commit `vX.Y.Z`, builds
    `docs-short-links-vX.Y.Z.zip` and attaches it to a GitHub release.
 4. Upload that zip in the
    [Chrome Web Store developer console](https://chrome.google.com/webstore/devconsole).

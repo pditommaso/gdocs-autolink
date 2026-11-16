@@ -5,9 +5,18 @@
   "description": "When pasting a GitHub issue/PR or Jira issue URL into Google Docs, insert it as a short link (#123 / KEY-123).",
   "content_scripts": [
     {
-      "matches": ["https://docs.google.com/document/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://docs.google.com/document/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
 }
